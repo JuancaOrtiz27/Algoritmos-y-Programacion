@@ -1,0 +1,128 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNgymAKVvj4edO3WNHemqPD",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/JuancaOrtiz27/Algoritmos-y-Programacion/blob/main/%23Ruleta%20de%20Frutas%20de%20Ninja\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        " # Ruleta de Frutas Ninja (básico)\n",
+        "import random\n",
+        "import datetime\n",
+        "\n",
+        "# --- Estructuras ---\n",
+        "frutas = [\"manzana\", \"arandano\",  \"naranja\", \"uva\", \"kiwi\", \"fresa\"]\n",
+        "intentos_usados = set()\n",
+        "intentos = 0\n",
+        "MAX_INTENTOS = 5\n",
+        "\n",
+        "# --- Selección de la fruta secreta ---\n",
+        "secreta = random.choice(frutas)\n",
+        "\n",
+        "print(\"¡Bienvenido a la Ruleta de Frutas Ninja!\")\n",
+        "print(f\"Tienes {MAX_INTENTOS} intentos para adivinar la fruta secreta.\")\n",
+        "print(  \"Las frutas disponibles son: \" + \", \".join(frutas)\n",
+        "\n",
+        "# --- Bucle principal del juego ---\n",
+        "while intentos < MAX_INTENTOS:\n",
+        "    print(\"-\" * 20)\n",
+        "\n",
+        "    # Manejar entrada vacía y normalizar\n",
+        "    intento_raw = input(f\"Intento #{intentos + 1}: Ingresa una fruta: \").strip().lower()\n",
+        "\n",
+        "    if not intento_raw:\n",
+        "        print(\"❌ Por favor, ingresa una fruta válida. El intento no cuenta.\")\n",
+        "        continue\n",
+        "\n",
+        "    # Validar que no se repitan los intentos\n",
+        "    if intento_raw in intentos_usados:\n",
+        "        print(f\"❌ Ya intentaste con '{intento_raw}'. ¡Prueba con otra fruta!\")\n",
+        "        continue\n",
+        "\n",
+        "    # Agregar el intento al set de intentos usados\n",
+        "    intentos_usados.add(intento_raw)\n",
+        "    intentos += 1\n",
+        "\n",
+        "    # Comprobar si el intento es correcto\n",
+        "    if intento_raw == secreta:\n",
+        "        print(f\"\\n🎉 ¡Felicidades! Adivinaste la fruta secreta ('{secreta}') en {intentos} intentos.\")\n",
+        "        victoria = True\n",
+        "        break\n",
+        "    else:\n",
+        "        print(\"😕 Incorrecto. ¡Sigue intentando!\")\n",
+        "        victoria = False\n",
+        "\n",
+        "# --- Mensaje final y registro del resultado ---\n",
+        "print(\"-\" * 20)\n",
+        "if not victoria:\n",
+        "    print(f\"\\nGame Over. 😥 Te quedaste sin intentos. La fruta secreta era '{secreta}'.\")\n",
+        "\n",
+        "# --- Extensión: Guardar el resultado en scores.txt ---\n",
+        "with open(\"scores.txt\", \"a\") as file:\n",
+        "    timestamp = datetime.datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n",
+        "    resultado = \"Victoria\" if victoria else \"Derrota\"\n",
+        "    log_entry = f\"{timestamp} - Resultado: {resultado}, Intentos: {intentos}, Fruta: {secreta}\\n\"\n",
+        "    file.write(log_entry)\n",
+        "\n",
+        "print(\"\\nSe ha guardado el resultado en 'scores.txt'. ¡Gracias por jugar!\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 426
+        },
+        "id": "yvzZdE8KSCw8",
+        "outputId": "752ff924-5acd-4a57-a16b-5129b2e5dff2"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "¡Bienvenido a la Ruleta de Frutas Ninja!\n",
+            "Tienes 5 intentos para adivinar la fruta secreta.\n",
+            "Las frutas disponibles son: manzana, arandano, naranja, uva, kiwi, fresa\n",
+            "--------------------\n"
+          ]
+        },
+        {
+          "output_type": "error",
+          "ename": "KeyboardInterrupt",
+          "evalue": "Interrupted by user",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mKeyboardInterrupt\u001b[0m                         Traceback (most recent call last)",
+            "\u001b[0;32m/tmp/ipython-input-225814062.py\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     20\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     21\u001b[0m     \u001b[0;31m# Manejar entrada vacía y normalizar\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 22\u001b[0;31m     \u001b[0mintento_raw\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0minput\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34mf\"Intento #{intentos + 1}: Ingresa una fruta: \"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mstrip\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlower\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     23\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     24\u001b[0m     \u001b[0;32mif\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0mintento_raw\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/ipykernel/kernelbase.py\u001b[0m in \u001b[0;36mraw_input\u001b[0;34m(self, prompt)\u001b[0m\n\u001b[1;32m   1175\u001b[0m                 \u001b[0;34m\"raw_input was called, but this frontend does not support input requests.\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1176\u001b[0m             )\n\u001b[0;32m-> 1177\u001b[0;31m         return self._input_request(\n\u001b[0m\u001b[1;32m   1178\u001b[0m             \u001b[0mstr\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mprompt\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1179\u001b[0m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_parent_ident\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\"shell\"\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/ipykernel/kernelbase.py\u001b[0m in \u001b[0;36m_input_request\u001b[0;34m(self, prompt, ident, parent, password)\u001b[0m\n\u001b[1;32m   1217\u001b[0m             \u001b[0;32mexcept\u001b[0m \u001b[0mKeyboardInterrupt\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1218\u001b[0m                 \u001b[0;31m# re-raise KeyboardInterrupt, to truncate traceback\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 1219\u001b[0;31m                 \u001b[0;32mraise\u001b[0m \u001b[0mKeyboardInterrupt\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"Interrupted by user\"\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0;32mNone\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1220\u001b[0m             \u001b[0;32mexcept\u001b[0m \u001b[0mException\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1221\u001b[0m                 \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlog\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwarning\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"Invalid Message:\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexc_info\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mTrue\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mKeyboardInterrupt\u001b[0m: Interrupted by user"
+          ]
+        }
+      ]
+    }
+  ]
+}
